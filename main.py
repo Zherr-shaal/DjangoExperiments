@@ -1,1 +1,3 @@
-print("hello Python")
+import feature
+
+print(feature.fibonacci(6))
