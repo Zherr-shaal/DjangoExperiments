@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Django test</title>
+    <meta charset="utf-8" />
+</head>
+<body>
+	<div>
+		<a href="/users">Пользователи</a>
+		<a href="/nets">Нейросети</a>
+	</div>
+	<div>
+		<form method="POST" action="create/">
+			{% csrf_token %}
+			<p>
+				<label>Введите название</label><br>
+				<input type="text" name="name" />
+			</p>
+			<p>
+				<label>Введите размер</label><br>
+				<input type="number" name="size" />
+			</p>
+			<input type="submit" value="Сохранить" >
+		</form>
+		{% if nets.count > 0 %}
+		<h2>Список пользователей</h2>
+		<table>
+			<thead><th>Id</th><th>Имя</th><th>Возраст</th><th></th></thead>
+			{% for net in nets %}
+			<tr>
+				<td>{{ net.id }}</td>
+				<td>{{ net.name }}</td>
+				<td>{{ net.age }}</td>
+				<td><a href="edit/{{net.id}}">Изменить</a> | <a href="delete/{{net.id}}">Удалить</a></td>
+			</tr>
+			{% endfor %}
+		</table>
+		{% endif %}
+	</div>
+</body>
+</html>
